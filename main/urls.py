@@ -20,3 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('contacts.urls'))
 ]
+
+admin.site.site_header = 'Contact Manager Administration'
+admin.site.index_title = 'Project administration'
