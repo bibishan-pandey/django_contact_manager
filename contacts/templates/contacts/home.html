@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="form-group">
+        <a href="{% url 'form' %}" class="btn btn-sm btn-outline-success">Create a new contact</a>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-2">
+            <div class="card">
+                <div class="row pt-3 pr-3 pl-3 align-items-center">
+                    <div class="col-6">
+                        <img class="img-fluid rounded-circle mx-auto d-block"
+                             src="{% static './images/male user.png' %}" alt="Card image cap">
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
+                           title="Edit">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                           title="Delete">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body text-justify">
+                    <h5 class="card-title">Matthew Perry</h5>
+                    <p class="card-text">Contact: +977-9861218463</p>
+                    <p class="card-text">Email: contact@email.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-2">
+            <div class="card">
+                <div class="row pt-3 pr-3 pl-3 align-items-center">
+                    <div class="col-6">
+                        <img class="img-fluid rounded-circle mx-auto d-block"
+                             src="{% static './images/female user.png' %}" alt="Card image cap">
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
+                           title="Edit">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                           title="Delete">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body text-justify">
+                    <h5 class="card-title">Courtney Cox</h5>
+                    <p class="card-text">Contact: +977-9861218463</p>
+                    <p class="card-text">Email: contact@email.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
