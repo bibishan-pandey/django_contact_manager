@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .models import Contact
 
 
-def home(request):
-    context = {
-        'contacts': Contact.objects.all()
-    }
-    return render(request, 'contacts/home.html', context)
+class HomePageView(LoginRequiredMixin, ListView):
+    template_name = 'contacts/home.html'
+    model = Contact
+    context_object_name = 'contacts'
 
 
+@login_required()
 def search(request):
     if request.GET:
         search_term = request.GET['search']
@@ -35,14 +38,14 @@ def delete(request, id):
     return redirect('home')
 
 
-class ContactFormView(CreateView):
+class ContactFormView(LoginRequiredMixin, CreateView):
     model = Contact
     template_name = 'contacts/form.html'
     fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
     success_url = '/'
 
 
-class ContactUpdateView(UpdateView):
+class ContactUpdateView(LoginRequiredMixin, UpdateView):
     model = Contact
     template_name = 'contacts/form.html'
     fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
