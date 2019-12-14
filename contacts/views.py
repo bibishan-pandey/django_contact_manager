@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.views.generic.edit import CreateView
 from .models import Contact
 
 
@@ -35,3 +36,10 @@ def delete(request, id):
     contact = Contact.objects.get(pk=id)
     contact.delete()
     return redirect('home')
+
+
+class ContactFormView(CreateView):
+    model = Contact
+    template_name = 'contacts/form.html'
+    fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
+    success_url = '/'
