@@ -13,13 +13,13 @@
                     </div>
                     <div class="card-body pt-0">
                         {% if contact.image == '' and contact.gender == 'F' %}
-                            <img class="img-fluid rounded-circle mx-auto d-block"
-                                 src="{% static './images/female user.png' %}" alt="{{ contact.name }} image">
+                            <img class="img-fluid rounded-circle mx-auto d-block w-50 h-50"
+                                 src="{% static 'images/female user.png' %}" alt="{{ contact.name }} image">
                         {% elif contact.image == '' and contact.gender == 'M' %}
-                            <img class="img-fluid rounded-circle mx-auto d-block"
-                                 src="{% static './images/male user.png' %}" alt="{{ contact.name }} image">
+                            <img class="img-fluid rounded-circle mx-auto d-block w-50 h-50"
+                                 src="{% static 'images/male user.png' %}" alt="{{ contact.name }} image">
                         {% elif contact.image is not None %}
-                            <img class="img-fluid rounded-circle mx-auto d-block"
+                            <img class="img-fluid rounded-circle mx-auto d-block w-50 h-50"
                                  src="{{ contact.image.url }}" alt="{{ contact.name }} image">
                         {% endif %}
                         <h6><span
