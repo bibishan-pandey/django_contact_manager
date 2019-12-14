@@ -14,6 +14,11 @@ class HomePageView(LoginRequiredMixin, ListView):
     model = Contact
     context_object_name = 'contacts'
 
+    # querying contact list that is added by logged in user only
+    def get_queryset(self):
+        contacts = super().get_queryset()
+        return contacts.filter(manager=self.request.user)
+
 
 @login_required()
 def search(request):
