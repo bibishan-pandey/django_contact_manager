@@ -22,7 +22,7 @@
             <a href="tel: {{ contact.phone }}" class="badge badge-success">{{ contact.phone }}</a><br>
             <a href="mailto: {{ contact.email }}" class="badge badge-success font-italic">{{ contact.email }}</a>
             <div class="pt-2">
-                <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
+                <a href="{% url 'edit' contact.id %}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
                    title="Edit">
                     <i class="far fa-edit"></i>
                 </a>

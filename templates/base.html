@@ -7,7 +7,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Contact Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -20,9 +20,10 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" method="POST">
-                {% csrf_token %}
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                {# {% csrf_token %} #}
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search"
+                       aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>

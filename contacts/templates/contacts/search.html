@@ -1,4 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-
+    <p class="lead">Searching results for {{ search }}...</p>
+    <hr>
+    <div class="form-group">
+        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-warning">Back to home</a>
+    </div>
+    <div class="row">
+        {% if contacts %}
+            {% for contact in contacts %}
+                {% include 'contacts/partials/_card.html' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="jumbotron jumbotron-fluid bg-transparent shadow-sm rounded">
+                    <div class="p-3 text-center">
+                        <h1 class="display-4">No Contacts!</h1>
+                        <p class="lead">You can add your contacts by clicking the "Create a new contact" button
+                            below.</p>
+                        <div class="form-group">
+                            <a href="{% url 'form' %}" class="btn btn-sm btn-outline-success">Create a new contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock content %}

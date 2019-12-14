@@ -9,15 +9,19 @@ def home(request):
     return render(request, 'contacts/home.html', context)
 
 
-def detail(request, id):
-    return render(request, 'contacts/detail.html', {})
-
-
 def search(request):
-    return render(request, 'contacts/search.html', {})
+    if request.GET:
+        search_term = request.GET['search']
+        search_results = Contact.objects.filter(name__icontains=search_term)
+        context = {
+            'search': search_term,
+            'contacts': search_results
+        }
+        return render(request, 'contacts/search.html', context)
+    return redirect('home')
 
 
-def form(request):
+def form(request, id=None):
     return render(request, 'contacts/form.html', {})
 
 
