@@ -5,55 +5,42 @@
         <a href="{% url 'form' %}" class="btn btn-sm btn-outline-success">Create a new contact</a>
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-2">
-            <div class="card">
-                <div class="row pt-3 pr-3 pl-3 align-items-center">
-                    <div class="col-6">
-                        <img class="img-fluid rounded-circle mx-auto d-block"
-                             src="{% static './images/male user.png' %}" alt="Card image cap">
+        {% for contact in contacts %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-2">
+                <div class="card">
+                    <div class="pl-3 pr-3 pt-3 align-items-center text-center">
+                        <h5 class="card-title font-weight-bold d-inline">{{ contact.name }}</h5>
                     </div>
-                    <div class="col-6">
-                        <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
-                           title="Edit">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
-                           title="Delete">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
+                    <div class="card-body pt-0">
+                        {% if contact.image == '' and contact.gender == 'F' %}
+                            <img class="img-fluid rounded-circle mx-auto d-block"
+                                 src="{% static './images/female user.png' %}" alt="{{ contact.name }} image">
+                        {% elif contact.image == '' and contact.gender == 'M' %}
+                            <img class="img-fluid rounded-circle mx-auto d-block"
+                                 src="{% static './images/male user.png' %}" alt="{{ contact.name }} image">
+                        {% elif contact.image is not None %}
+                            <img class="img-fluid rounded-circle mx-auto d-block"
+                                 src="" alt="{{ contact.name }} image">
+                        {% endif %}
+                        <h6><span
+                                class="badge badge-secondary font-italic font-weight-light">{{ contact.date_added }}</span>
+                        </h6>
+                        <span class="badge badge-pill badge-primary">{{ contact.info }}</span>
+                        <span href="#" class="badge badge-light">{{ contact.phone }}</span>
+                        <a href="#" class="badge badge-success font-italic">{{ contact.email }}</a>
+                        <div class="pt-2">
+                            <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
+                               title="Edit">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a href="{% url 'delete' contact.id %}" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                               title="Delete">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body text-justify">
-                    <h5 class="card-title">Matthew Perry</h5>
-                    <p class="card-text">Contact: +977-9861218463</p>
-                    <p class="card-text">Email: contact@email.com</p>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-2">
-            <div class="card">
-                <div class="row pt-3 pr-3 pl-3 align-items-center">
-                    <div class="col-6">
-                        <img class="img-fluid rounded-circle mx-auto d-block"
-                             src="{% static './images/female user.png' %}" alt="Card image cap">
-                    </div>
-                    <div class="col-6">
-                        <a href="#" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="top"
-                           title="Edit">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top"
-                           title="Delete">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body text-justify">
-                    <h5 class="card-title">Courtney Cox</h5>
-                    <p class="card-text">Contact: +977-9861218463</p>
-                    <p class="card-text">Email: contact@email.com</p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock content %}
