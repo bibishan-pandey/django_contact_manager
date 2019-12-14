@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.forms import UserCreationForm
 from .models import Contact
 
 
@@ -50,3 +51,9 @@ class ContactUpdateView(UpdateView):
     # def form_valid(self, form):
     #     instance = form.save()
     #     return redirect('edit', instance.pk)
+
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = '/'
