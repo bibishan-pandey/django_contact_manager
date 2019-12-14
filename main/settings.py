@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'contacts.apps.ContactsConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'import_export'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
