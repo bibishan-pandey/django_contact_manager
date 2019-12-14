@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.contrib import messages
 from .models import Contact
 
 
@@ -43,6 +44,7 @@ def delete(request, id):
     contact = Contact.objects.get(pk=id)
     if contact in Contact.objects.filter(manager=request.user):
         contact.delete()
+    messages.success(request, 'Contact have been successfully deleted!')
     return redirect('home')
 
 
@@ -56,6 +58,7 @@ class ContactFormView(LoginRequiredMixin, CreateView):
         instance = form.save(commit=False)
         instance.manager = self.request.user
         instance.save()
+        messages.success(self.request, 'Contact have been successfully created!')
         return redirect('home')
 
 
@@ -65,12 +68,22 @@ class ContactUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
     success_url = '/'
 
-    # def form_valid(self, form):
-    #     instance = form.save()
-    #     return redirect('edit', instance.pk)
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.manager = self.request.user
+        instance.save()
+        messages.success(self.request, 'Contact have been successfully updated!')
+        return redirect('home')
 
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.manager = self.request.user
+        instance.save()
+        messages.success(self.request, 'Account have been successfully registered!')
+        return redirect('home')
