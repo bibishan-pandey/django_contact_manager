@@ -3,7 +3,7 @@ from .views import search, delete, HomePageView, ContactFormView, ContactUpdateV
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
-    path('form/', ContactFormView.as_view(), name='form'),
+    path('create/', ContactFormView.as_view(), name='create'),
     path('edit/<int:pk>/', ContactUpdateView.as_view(), name='edit'),
     path('delete/<int:id>/', delete, name='delete'),
     path('search/', search, name='search'),

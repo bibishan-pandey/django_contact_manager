@@ -32,21 +32,23 @@ def search(request):
         )
         context = {
             'search': search_term,
-            'contacts': search_results
+            'contacts': search_results.filter(manager=request.user)
         }
         return render(request, 'contacts/search.html', context)
     return redirect('home')
 
 
+@login_required()
 def delete(request, id):
     contact = Contact.objects.get(pk=id)
-    contact.delete()
+    if contact in Contact.objects.filter(manager=request.user):
+        contact.delete()
     return redirect('home')
 
 
 class ContactFormView(LoginRequiredMixin, CreateView):
     model = Contact
-    template_name = 'contacts/form.html'
+    template_name = 'contacts/create.html'
     fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
     success_url = '/'
 
@@ -59,7 +61,7 @@ class ContactFormView(LoginRequiredMixin, CreateView):
 
 class ContactUpdateView(LoginRequiredMixin, UpdateView):
     model = Contact
-    template_name = 'contacts/form.html'
+    template_name = 'contacts/edit.html'
     fields = ['name', 'email', 'phone', 'info', 'gender', 'image']
     success_url = '/'
 

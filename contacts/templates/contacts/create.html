@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <p class="lead">Creating a contact...</p>
+    <hr>
+    <div class="form-group">
+        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-warning">Back to home</a>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock content %}
