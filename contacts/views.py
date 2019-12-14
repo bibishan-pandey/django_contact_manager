@@ -17,7 +17,7 @@ def search(request):
             Q(name__icontains=search_term) |
             Q(email__icontains=search_term) |
             Q(info__icontains=search_term) |
-            Q(phone=search_term)
+            Q(phone__icontains=search_term)
         )
         context = {
             'search': search_term,
